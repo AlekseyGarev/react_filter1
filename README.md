@@ -1,43 +1,92 @@
-# Домашнее задание к курсу «React: библиотека № 1 в современной фронтенд-разработке»
+Портфолио с фильтрами
+===
 
-## Список заданий
+Необходимо реализовать портфолио с фильтрами, аналогичное указанному на изображении.
 
-### Блок 1. Компоненты
+![portfolio-all](./assets/portfolio-all.png)
 
-1.1. [Компоненты](components)
+## Описание проекта
 
-1.2. [События и состояние](events-state)
+Разработайте компонент класса `Portfolio`, хранящий список фильтров, активный фильтр, а также список проектов.
 
-1.3. [Props](props)
+Сами фильтры отображаются в компоненте без состояния `Toolbar`, которому от `Portfolio` мы передаём три свойства:
+- `filters` — список фильтров, название которых совпадает с категориями проектов;
+- `selected` — активный фильтр;
+- `onSelectFilter(filter)` — обработчик события, который реагирует на выбор пользователем одного из фильтров, обработчик принимает один аргумент — строку с названием фильтра.
 
-1.4. [Формы](forms)
+Пример:
+```
+<Toolbar
+  filters={["All", "Websites", "Flayers", "Business Cards"]}
+  selected="All"
+  onSelectFilter={(filter) => {console.log(filter);}}/>
+```
 
-### Блок 2. Продвинутые техники, одностраничные приложения
+В этом примере при выборе фильтра его название будет выведено в консоль. Например, «Business Cards».
 
-2.1. [Композиция компонентов](composition)
+Изображения самих проектов отображаются компонентом без состояния `ProjectList`, которому от `Portfolio` мы передаём список проектов — в свойство `projects`. Отображение проектов — это единственная ответственность компонента `ProjectList`.
 
-2.2. [Жизненный цикл и работа с HTTP](lifecycle-http)
+Чтобы компонент `Portfolio` мог реагировать на выбор пользователем фильтра проектов, например, `Business Cards`, и передавать отфильтрованные по категории `Business Cards` проекты в компонент `ProjectList`, в класс `Portfolio` необходимо добавить состояние (state).
 
-2.3. [HOC](hoc)
+Ваша задача:
+- установить состояние выбранного фильтра в обработчике события, который `Portfolio` передаёт в свойство `onSelectFilter` компонента `Toolbar`;
+- из компонента `Portfolio` передать активный фильтр в свойство `selected` компонента `Toolbar`;
+- в компоненте `Portfolio` отфильтровать по активному фильтру проекты и передать их в компонент `ProjectList`.
 
-2.4. [hooks, Context API](hooks-context)
+![portfolio-cards.png](./assets/portfolio-cards.png)
 
-2.5. [React Router](router)
-
-### Блок 3. Redux - управление состоянием
-
-3.1. [Redux](redux)
-
-3.1. [Redux Toolkit](toolkit)
-
-3.2. [Redux Observable](observable)
-
-3.3. [Redux Saga](saga)
-
-### Полезные ссылки:
-
-* [исходники с лекций](https://github.com/netology-code/ra16-code)
-* [требования к домашним работам](requirements.md)
-* [список рекомендуемого ПО](software.md)
-* [инструкция по работе в терминале](terminal.md)
-* [типичные проблемы и способы их решения](problems.md)
+Набор данных для отображения:
+```js
+[{
+  img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/filter/img/mon.jpg",
+  category: "Business Cards"
+}, {
+  img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/filter/img/200.jpg",
+  category: "Websites"
+}, {
+  img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/filter/img/emi_haze.jpg",
+  category: "Websites"
+}, {
+  img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/filter/img/codystretch.jpg",
+  category: "Websites"
+}, {
+  img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/filter/img/Triangle_003.jpg",
+  category: "Business Cards"
+}, {
+  img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/filter/img/place200x290.png",
+  category: "Websites"
+}, {
+  img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/filter/img/200.jpg",
+  category: "Websites"
+}, {
+  img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/filter/img/transmission.jpg",
+  category: "Business Cards"
+}, {
+  img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/filter/img/place200x290_1.png",
+  category: "Websites"
+}, {
+  img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/filter/img/place200x290_2.png",
+  category: "Flayers"
+}, {
+  img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/filter/img/the_ninetys_brand.jpg",
+  category: "Websites"
+}, {
+  img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/filter/img/dia.jpg",
+  category: "Business Cards"
+}, {
+  img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/filter/img/Triangle_350x197.jpg",
+  category: "Websites"
+}, {
+  img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/filter/img/emi_haze.jpg",
+  category: "Websites"
+}, {
+  img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/filter/img/transmission.jpg",
+  category: "Business Cards"
+}, {
+  img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/filter/img/Triangle_350x197_1.jpg",
+  category: "Websites"
+}, {
+  img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/filter/img/place200x290_3.png",
+  category: "Flayers"
+}]
+```
